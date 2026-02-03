@@ -1,19 +1,20 @@
+import os
 import asyncio
 from datetime import datetime, timezone
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-# 🔑 ВСТАВЬ ТОКЕН
-TOKEN = "8529225810:AAFd7vSBqPOb8dieLMSU9QYN12Ndhryw8u0"
+# 🔐 ТОКЕН БЕРЁТСЯ ИЗ ENV (Render / GitHub)
+TOKEN = os.getenv("TOKEN")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# ⏱ реальный старт отсчёта (фиксируется при запуске)
+# ⏱ РЕАЛЬНЫЙ старт отсчёта (фиксируется при запуске)
 REAL_START_TIME = datetime.now(timezone.utc)
 
-# 📅 виртуальное начало
+# 📅 ВИРТУАЛЬНОЕ НАЧАЛО
 VIRTUAL_START_YEAR = 2015
 
 
@@ -36,6 +37,7 @@ def get_virtual_date():
     # 1 день = 4 минуты
     day = int(remaining_minutes // 4) + 1
 
+    # ограничения
     if month > 12:
         month = 12
     if day > 30:
